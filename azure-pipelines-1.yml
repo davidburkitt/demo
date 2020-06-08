@@ -24,6 +24,9 @@ stages:
         - script: cd $(build.artifactstagingdirectory)/git-secrets; sudo make install;
           displayName: 'Make git-secrets install'
 
+        - script: git secrets --add-provider -- egrep -v '(^#|^\s*$|^$)' $(Build.Repository.LocalPath)/patterns.txt
+          displayName: 'Add custom pattern provider'
+
         - script: cd $(Build.Repository.LocalPath);git secrets --register-aws;git secrets --scan
           displayName: 'Scan pipeline repo for secrets'
   - stage: ContinueBuild
