@@ -30,11 +30,6 @@ stages:
             versionSpec: '$(python.version)'
         displayName: 'Use Python $(python.version)'
 
-      - job: UpdatePIP
-        steps:
-        - script: python -m pip install --upgrade pip;pip install -r requirements.txt
-        displayName: 'Install dependencies'
-
       - job: GittyLeaks
         steps:
         - script: pip install gittyleaks 
