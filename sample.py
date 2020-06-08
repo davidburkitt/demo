@@ -1,5 +1,8 @@
 # Mimic potential occurence of api keys
 
+aws_acess_key_id = AKIAHKA6OJ3KKNLTI8FC
+aws_secret_access_key = sdfsdsdfsdsdfsdsdfsdsdfsdsdfsdsdfsdsdfsd
+
 a = 'yR+uWwIZp6ihFgaHV8410b2BxbRt5QiAj1EZx1qj'
 b = 'yR+uWwIZp6ihFgaHV8410b2BxbRt5QiAj1EZx1qj'
 
