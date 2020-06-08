@@ -23,13 +23,15 @@ stages:
   - stage: ScanForSecrets
     dependsOn: []
     jobs:
-      - job: Setup PIP
+      - job: SetupPIP
         steps:
         - task: UsePythonVersion@0
           inputs:
             versionSpec: '$(python.version)'
         displayName: 'Use Python $(python.version)'
 
+      - job: UpdatePIP
+        steps:
         - script: python -m pip install --upgrade pip;pip install -r requirements.txt
         displayName: 'Install dependencies'
 
