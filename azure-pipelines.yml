@@ -1,7 +1,7 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# Python package
+# Create and test a Python package on multiple Python versions.
+# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
 - master
@@ -18,30 +18,23 @@ strategy:
       python.version: '3.6'
     Python37:
       python.version: '3.7'
-      
-stages:
-  - stage: ScanForSecrets
-    dependsOn: []
-    jobs:
-      - job: SetupPIP
-        steps:
-        - task: UsePythonVersion@0
-          inputs:
-            versionSpec: '$(python.version)'
-        displayName: 'Use Python $(python.version)'
 
-      - job: GittyLeaks
-        steps:
-        - script: pip install gittyleaks 
-          displayName: 'Install gittyleaks'
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Use Python $(python.version)'
 
-        - script: cd $(Build.Repository.LocalPath);gittyleaks
-          displayName: 'Scan pipeline repo for secrets'
-  - stage: ContinueBuild
-    dependsOn:
-      - ScanForSecrets
-    jobs:
-      - job: NextJob
-        steps:
-        - script: echo 'Scan for secrets passed, continue.'
-          displayName: 'Scan for secrets passed, continue'
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: |
+    pip install pytest pytest-azurepipelines
+    pytest
+  displayName: 'pytest'
+
+- script: ~
+    pip install gittyleaks
+  displayName: 'Install gittyleaks'
