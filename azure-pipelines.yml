@@ -25,10 +25,8 @@ steps:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
 
-- script: |
-    python -m pip install --upgrade pip
+- script: python -m pip install --upgrade pip
   displayName: 'Install dependencies'
 
-- script: ~
-    pip install gittyleaks
+- script: pip install gittyleaks
   displayName: 'Install gittyleaks'
