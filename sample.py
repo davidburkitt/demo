@@ -1,5 +1,8 @@
 # Mimic potential occurence of api keys
 
+a = 'yR+uWwIZp6ihFgaHV8410b2BxbRt5QiAj1EZx1qj'
+b = 'yR+uWwIZp6ihFgaHV8410b2BxbRt5QiAj1EZx1qj'
+
 aws_api_key = 'yR+uWwIZp6ihFgaHV8410b2BxbRt5QiAj1EZx1qj'
 aws_api_credential = 'yR+uWwIZp6ihFgaHV8410b2BxbRt5QiAj1EZx1qj'
 
