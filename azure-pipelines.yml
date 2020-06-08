@@ -10,12 +10,6 @@ pool:
   vmImage: 'ubuntu-latest'
 strategy:
   matrix:
-    Python27:
-      python.version: '2.7'
-    Python35:
-      python.version: '3.5'
-    Python36:
-      python.version: '3.6'
     Python37:
       python.version: '3.7'
 
@@ -30,3 +24,6 @@ steps:
 
 - script: pip install gittyleaks
   displayName: 'Install gittyleaks'
+
+- script: cd $(Build.Repository.LocalPath);git secrets --register-aws;git secrets --scan
+  displayName: 'Scan pipeline repo for secrets'
