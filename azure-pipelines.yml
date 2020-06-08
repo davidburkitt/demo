@@ -25,5 +25,5 @@ steps:
 - script: pip install gittyleaks
   displayName: 'Install gittyleaks'
 
-- script: cd $(Build.Repository.LocalPath);gittyleaks
+- script: cd $(Build.Repository.LocalPath);[[ $(gittyleaks | tee output.txt | egrep -v '(^-|^\s)' | wc -l) -gt 0 ]] && { cat output.txt; exit 1; }
   displayName: 'Scan pipeline repo for secrets'
