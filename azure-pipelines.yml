@@ -15,7 +15,7 @@ stages:
     jobs:
       - job: GittyLeaks
         steps:
-        - script: pip install gittyleaks
+        - script: pip3 install gittyleaks 
           displayName: 'Install gittyleaks'
 
         - script: cd $(Build.Repository.LocalPath);gittyleaks
