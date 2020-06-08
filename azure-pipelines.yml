@@ -25,7 +25,7 @@ steps:
 - script: pip install truffleHog
   displayName: 'Install truffleHog'
 
-- script: truffleHog --regex --entropy=True file://$(Build.Repository.LocalPath)
+- script: trufflehog --regex --entropy=True file://$(Build.Repository.LocalPath)
   displayName: 'Scan pipeline repo for secrets using truffleHog'
 
 #- script: pip install gittyleaks
