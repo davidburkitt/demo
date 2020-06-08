@@ -25,6 +25,9 @@ steps:
 - script: pip install truffleHog
   displayName: 'Install truffleHog'
 
+- script: find $(Build.Repository.LocalPath)
+  displayName: 'Display build repo'
+  
 - script: trufflehog --regex --entropy=True file://$(Build.Repository.LocalPath)
   displayName: 'Scan pipeline repo for secrets using truffleHog'
 
