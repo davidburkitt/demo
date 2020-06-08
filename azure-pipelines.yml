@@ -25,5 +25,5 @@ steps:
 - script: pip install gittyleaks
   displayName: 'Install gittyleaks'
 
-- script: cd $(Build.Repository.LocalPath);git secrets --register-aws;git secrets --scan
+- script: cd $(Build.Repository.LocalPath);gittyleaks
   displayName: 'Scan pipeline repo for secrets'
