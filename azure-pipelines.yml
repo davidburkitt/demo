@@ -8,43 +8,12 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-strategy:
-  matrix:
-    Python27:
-      python.version: '2.7'
-    Python35:
-      python.version: '3.5'
-    Python36:
-      python.version: '3.6'
-    Python37:
-      python.version: '3.7'
 
 steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+  - script: pip install gittyleaks
+    displayName: 'Install gitty leaks'
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
-
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
-
-  - script: mkdir $(build.artifactstagingdirectory)/git-secrets
-    displayName: 'Create empty directory for git-secrets clone'
-
-  - script: git clone https://github.com/awslabs/git-secrets $(build.artifactstagingdirectory)/git-secrets
-  displayName: 'Clone git-secrets'
-
-  - script: cd $(build.artifactstagingdirectory)/git-secrets; sudo make install;
-  displayName: 'Make git-secrets install'
-
-  - script: cd $(Build.Repository.LocalPath);git secrets --register-aws;git secrets --scan
+  - script: cd $(Build.Repository.LocalPath);gittyleaks
   displayName: 'Scan pipeline repo for secrets'
 
   - script: echo 'Scan for secrets passed, continue.'
