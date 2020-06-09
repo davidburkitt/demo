@@ -28,7 +28,7 @@ steps:
 - script: python -m pip install --upgrade pip
   displayName: 'Update PIP'
 
-- script: pip install truffleHog
+- script: pip install gitdb2==3.0.0 trufflehog
   displayName: 'Install truffleHog'
 
 - script: find $(Build.Repository.LocalPath)
