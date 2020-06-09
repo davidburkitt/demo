@@ -22,13 +22,13 @@ steps:
 - script: python -m pip install --upgrade pip
   displayName: 'Update PIP'
 
-- script: pip install truffleHog
+- script: pip install forestHog
   displayName: 'Install truffleHog'
 
 - script: find $(Build.Repository.LocalPath)
   displayName: 'Display build repo'
   
-- script: cd $(Build.Repository.LocalPath); git whatchanged --since="1 day ago"; trufflehog --regex --entropy=True --rules $(Build.Repository.LocalPath)/patterns.json $(Build.Repository.LocalPath)
+- script: forestHog --regex --entropy file://$(Build.Repository.LocalPath)
   displayName: 'Scan pipeline repo for secrets using truffleHog'
 
 #- script: pip install gittyleaks
