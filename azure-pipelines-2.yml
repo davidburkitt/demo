@@ -1,0 +1,44 @@
+# Python package
+# Create and test a Python package on multiple Python versions.
+# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/python
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+strategy:
+  matrix:
+#    Python27:
+#      python.version: '2.7'
+#    Python35:
+#      python.version: '3.5'
+#    Python36:
+#      python.version: '3.6'
+    Python37:
+      python.version: '3.7'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Set Python version $(python.version)'
+
+- script: python -m pip install --upgrade pip
+  displayName: 'Update PIP'
+
+- script: pip install truffleHog
+  displayName: 'Install truffleHog'
+
+- script: find $(Build.Repository.LocalPath)
+  displayName: 'Display build repo'
+  
+- script: trufflehog --regex --entropy=True file://$(Build.Repository.LocalPath)
+  displayName: 'Scan pipeline repo for secrets using truffleHog'
+
+#- script: pip install gittyleaks
+#  displayName: 'Install gittyleaks'
+
+#- script: cd $(Build.Repository.LocalPath);[[ $(gittyleaks | tee output.txt | egrep -v '(^-|^\s)' | wc -l) -gt 0 ]] && { cat output.txt; exit 1; }
+#  displayName: 'Scan pipeline repo for secrets using gittyleaks'
