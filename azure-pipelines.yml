@@ -38,7 +38,7 @@ displayName: 'Clone pipeline repo'
 #  displayName: 'Display build repo'
   
 - script: trufflehog --regex --entropy=True $(System.DefaultWorkingDirectory)/demo
-  displayName: 'Scan pipeline repo for secrets using truffleHog'
+  displayName: 'Scan cloned pipeline repo for secrets using truffleHog'
 
 #- script: pip install gittyleaks
 #  displayName: 'Install gittyleaks'
