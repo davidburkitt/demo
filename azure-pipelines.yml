@@ -10,12 +10,12 @@ pool:
   vmImage: 'ubuntu-latest'
 strategy:
   matrix:
-    Python27:
-      python.version: '2.7'
-    Python35:
-      python.version: '3.5'
-    Python36:
-      python.version: '3.6'
+#    Python27:
+#      python.version: '2.7'
+#    Python35:
+#      python.version: '3.5'
+#    Python36:
+#      python.version: '3.6'
     Python37:
       python.version: '3.7'
 
@@ -28,13 +28,13 @@ steps:
 - script: python -m pip install --upgrade pip
   displayName: 'Update PIP'
 
-- script: pip install forestHog
+- script: pip install truffleHog
   displayName: 'Install truffleHog'
 
 - script: find $(Build.Repository.LocalPath)
   displayName: 'Display build repo'
   
-- script: foresthog --regex --entropy file://$(Build.Repository.LocalPath)
+- script: truffleHog --regex --entropy=True --rules patterns.txt file://$(Build.Repository.LocalPath)
   displayName: 'Scan pipeline repo for secrets using truffleHog'
 
 #- script: pip install gittyleaks
