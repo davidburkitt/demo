@@ -10,12 +10,6 @@ pool:
   vmImage: 'ubuntu-latest'
 strategy:
   matrix:
-    Python27:
-      python.version: '2.7'
-    Python35:
-      python.version: '3.5'
-    Python36:
-      python.version: '3.6'
     Python37:
       python.version: '3.7'
 
@@ -34,7 +28,7 @@ steps:
 - script: find $(Build.Repository.LocalPath)
   displayName: 'Display build repo'
   
-- script: trufflehog --regex --entropy=True --rules $(Build.Repository.LocalPath)/patterns.json $(Build.Repository.LocalPath)
+- script: cd $(Build.Repository.LocalPath); git whatchanged --since="1 day ago"; trufflehog --regex --entropy=True --rules $(Build.Repository.LocalPath)/patterns.json $(Build.Repository.LocalPath)
   displayName: 'Scan pipeline repo for secrets using truffleHog'
 
 #- script: pip install gittyleaks
