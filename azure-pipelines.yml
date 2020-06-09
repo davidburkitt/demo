@@ -32,7 +32,7 @@ steps:
   displayName: 'Install truffleHog'
 
 - script: echo $(Build.Repository.Uri)
-- script: cd $(System.DefaultWorkingDirectory);AUTH=$(echo -n ":$REPO_PAT" | openssl base64 | tr -d '\n'); git -c http.$(Build.Repository.Uri).extraheader="AUTHORIZATION: basic $AUTH" clone $(Build.Repository.Uri) --no-checkout --branch master
+- script: cd $(System.DefaultWorkingDirectory);AUTH=$(echo -n ":$REPO_PAT" | openssl base64 | tr -d '\n'); git -c http.$(Build.Repository.Uri).extraheader="AUTHORIZATION:basic $AUTH" clone $(Build.Repository.Uri) --no-checkout --branch master
 
 #- script: cd $(Build.Repository.LocalPath); git log -p -10
 #  displayName: 'Display build repo'
