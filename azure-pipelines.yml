@@ -28,7 +28,7 @@ steps:
 - script: find $(Build.Repository.LocalPath)
   displayName: 'Display build repo'
   
-- script: trufflehog --regex --entropy=True $(Build.Repository.LocalPath);echo $?;trufflehog --regex --entropy=True $(Build.Repository.LocalPath) > output.txt;cat output.txt
+- script: cd $(Build.Repository.LocalPath); trufflehog --regex --entropy=True .
   displayName: 'Scan pipeline repo for secrets using truffleHog'
 
 #- script: pip install gittyleaks
