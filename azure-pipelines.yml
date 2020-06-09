@@ -31,7 +31,7 @@ steps:
 - script: pip install gitdb2==3.0.0 trufflehog
   displayName: 'Install truffleHog'
 
-- script: find $(Build.Repository.LocalPath)
+- script: cd $(Build.Repository.LocalPath); git whatchanged --since="1 day ago"
   displayName: 'Display build repo'
   
 - script: trufflehog --regex --entropy=True https://github.com/davidburkitt/demo
