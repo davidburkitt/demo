@@ -40,7 +40,8 @@ steps:
 #- script: cd $(Build.Repository.LocalPath); git log -p -10
 #  displayName: 'Display build repo'
   
-- script: trufflehog --regex --entropy=True $(System.DefaultWorkingDirectory)/s
+#- script: trufflehog --regex --entropy=True $(System.DefaultWorkingDirectory)/s
+- script: trufflehog --regex --entropy=True $(Build.Repository.LocalPath)
   displayName: 'Scan cloned pipeline repo for secrets using truffleHog'
 
 #- script: pip install gittyleaks
