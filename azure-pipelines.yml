@@ -31,19 +31,16 @@ steps:
 - script: pip install gitdb2==3.0.0 trufflehog
   displayName: 'Install truffleHog'
 
-- script: echo $(Build.Repository.Uri) | awk -v pat=$REPO_PAT -F// '{print $1"//username:"pat"@"$2}'
-  displayName: 'Check bb repo URI'
-  
 #- script: cd $(System.DefaultWorkingDirectory); URI=$(Build.Repository.Uri); git clone $(echo $URI | awk -v pat=$REPO_PAT -F// '{print $1"//username:"pat"@"$2}') --no-checkout --branch master
 #  displayName: 'Clone pipeline repo (no header for bitbucket)'
 
-- script: cd $(System.DefaultWorkingDirectory); AUTH=$(echo -n ":$REPO_PAT" | openssl base64 | tr -d '\n'); git -c http.$(Build.Repository.Uri).extraheader="AUTHORIZATION:basic $AUTH" clone $(Build.Repository.Uri) --no-checkout --branch $(Build.SourceBranchName)
-  displayName: 'Clone pipeline repo'
+#- script: cd $(System.DefaultWorkingDirectory); AUTH=$(echo -n ":$REPO_PAT" | openssl base64 | tr -d '\n'); git -c http.$(Build.Repository.Uri).extraheader="AUTHORIZATION:basic $AUTH" clone $(Build.Repository.Uri) --no-checkout --branch $(Build.SourceBranchName)
+#  displayName: 'Clone pipeline repo'
 
 #- script: cd $(Build.Repository.LocalPath); git log -p -10
 #  displayName: 'Display build repo'
   
-- script: trufflehog --regex --entropy=True $(System.DefaultWorkingDirectory)/demo
+- script: trufflehog --regex --entropy=True $(System.DefaultWorkingDirectory)/s
   displayName: 'Scan cloned pipeline repo for secrets using truffleHog'
 
 #- script: pip install gittyleaks
