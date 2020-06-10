@@ -31,7 +31,7 @@ steps:
 - script: pip install gitdb2==3.0.0 trufflehog
   displayName: 'Install truffleHog'
 
-- script: echo $(echo $(Build.Repository.Uri) | awk -v pat=$REPO_PAT -F// '{print $1"//username:"pat"@"$2}'
+- script: echo $(Build.Repository.Uri) | awk -v pat=$REPO_PAT -F// '{print $1"//username:"pat"@"$2}'
   displayName: 'Check bb repo URI'
   
 - script: cd $(System.DefaultWorkingDirectory); URI=$(echo $(Build.Repository.Uri); git clone $(echo $URI | awk -v pat=$REPO_PAT -F// '{print $1"//username:"pat"@"$2}') --no-checkout --branch master
