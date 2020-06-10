@@ -31,7 +31,7 @@ steps:
 - script: pip install gitdb2==3.0.0 trufflehog
   displayName: 'Install truffleHog'
 
-- script: repoURI=$(echo $(Build.Repository.Uri) | awk '{gsub("//","//username:$REPO_PAT/");print $0".git"}');echo "##vso[task.setvariable variable=repoURI]$repoURI"
+- script: AUTH=$(echo -n "username:$REPO_PAT");repoURI=$(echo $(Build.Repository.Uri) | awk '{gsub("//","//$AUTH/");print $0".git"}');echo "##vso[task.setvariable variable=repoURI]$repoURI"
   displayName: 'Setup bitbucket clone URI'
 
 - script: echo $(repoURI)
