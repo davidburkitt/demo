@@ -44,7 +44,6 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'cd $(System.DefaultWorkingDirectory); git switch $(Build.SourceBranchName); trufflehog --regex --entropy=False .'
-    failOnStderr: false
   continueOnError: true
 
 #- bash: cd $(System.DefaultWorkingDirectory); git switch $(Build.SourceBranchName); trufflehog --regex --entropy=False .
